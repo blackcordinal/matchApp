@@ -18,6 +18,14 @@ class CardCollectionViewCell: UICollectionViewCell {
     func setCard(_ card: Card){
         self.card = card
         frontImageView.image = UIImage(named: card.imageName)
+        if card.itsFlipped == true{
+            // make sure the frontImageviev is on top
+            UIView.transition(from: backImageView, to: frontImageView, duration: 0, options: [.showHideTransitionViews, .transitionFlipFromLeft], completion: nil)
+        } else {
+            //make sure the backImageView on top
+            UIView.transition(from: frontImageView, to: backImageView, duration: 0, options: [.showHideTransitionViews, .transitionFlipFromLeft], completion: nil)
+            
+        }
     }
     
     func flip() {
