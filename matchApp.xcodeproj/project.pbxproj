@@ -14,6 +14,9 @@
 		680AB129206C4AC500D34312 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 680AB127206C4AC500D34312 /* LaunchScreen.storyboard */; };
 		680AB134206C4AC500D34312 /* matchAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680AB133206C4AC500D34312 /* matchAppTests.swift */; };
 		680AB13F206C4AC500D34312 /* matchAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680AB13E206C4AC500D34312 /* matchAppUITests.swift */; };
+		680AB14D206CD9FC00D34312 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680AB14C206CD9FC00D34312 /* CardModel.swift */; };
+		680AB14F206CDB7A00D34312 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680AB14E206CDB7A00D34312 /* Card.swift */; };
+		680AB151206CE05300D34312 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680AB150206CE05300D34312 /* CardCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		680AB13A206C4AC500D34312 /* matchAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = matchAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		680AB13E206C4AC500D34312 /* matchAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = matchAppUITests.swift; sourceTree = "<group>"; };
 		680AB140206C4AC500D34312 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		680AB14C206CD9FC00D34312 /* CardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
+		680AB14E206CDB7A00D34312 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		680AB150206CE05300D34312 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,9 @@
 			isa = PBXGroup;
 			children = (
 				680AB11E206C4AC500D34312 /* AppDelegate.swift */,
+				680AB14C206CD9FC00D34312 /* CardModel.swift */,
+				680AB150206CE05300D34312 /* CardCollectionViewCell.swift */,
+				680AB14E206CDB7A00D34312 /* Card.swift */,
 				680AB120206C4AC500D34312 /* ViewController.swift */,
 				680AB122206C4AC500D34312 /* Main.storyboard */,
 				680AB125206C4AC500D34312 /* Assets.xcassets */,
@@ -261,6 +270,9 @@
 			files = (
 				680AB121206C4AC500D34312 /* ViewController.swift in Sources */,
 				680AB11F206C4AC500D34312 /* AppDelegate.swift in Sources */,
+				680AB14D206CD9FC00D34312 /* CardModel.swift in Sources */,
+				680AB151206CE05300D34312 /* CardCollectionViewCell.swift in Sources */,
+				680AB14F206CDB7A00D34312 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
