@@ -51,7 +51,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let cell = CollectionView.cellForItem(at: indexPath) as! CardCollectionViewCell
         let card = cardArray[indexPath.row]
         
-        if card.itsFlipped == false {
+        if card.itsFlipped == false && card.itsMatched == false {
             //flip card
             cell.flip()
             card.itsFlipped = true

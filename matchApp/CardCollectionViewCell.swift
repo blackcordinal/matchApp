@@ -17,6 +17,12 @@ class CardCollectionViewCell: UICollectionViewCell {
     //Try to install image on card
     func setCard(_ card: Card){
         self.card = card
+        if card.itsMatched == true {
+            backImageView.alpha = 0
+            frontImageView.alpha = 0
+            return
+        }
+        
         frontImageView.image = UIImage(named: card.imageName)
         if card.itsFlipped == true{
             // make sure the frontImageviev is on top
