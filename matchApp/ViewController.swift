@@ -113,7 +113,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             cardOneCell?.backFlip()
             cardTwoCell?.backFlip()
         }
+        // Tell the collectionViewCell to reload of the first card is nil
+        if cardOneCell == nil {
+            CollectionView.reloadItems(at: [firstFlippedCardIndex!])
+        }
+        //Reset the track the first card flipped
+        
         firstFlippedCardIndex = nil
+        
     }
     
 }

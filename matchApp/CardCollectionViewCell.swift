@@ -21,7 +21,13 @@ class CardCollectionViewCell: UICollectionViewCell {
             backImageView.alpha = 0
             frontImageView.alpha = 0
             return
+        } else {
+            
+            backImageView.alpha = 1
+            frontImageView.alpha = 1
+            
         }
+        
         
         frontImageView.image = UIImage(named: card.imageName)
         if card.itsFlipped == true{
