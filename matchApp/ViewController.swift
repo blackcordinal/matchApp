@@ -11,12 +11,12 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     
     
-    
     @IBOutlet weak var CollectionView: UICollectionView!
+    
     var model = CardModel()
-    //method get cards model
     var cardArray = [Card]()
     
+    var firstFlippedCardIndex:IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +55,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             //flip card
             cell.flip()
             card.itsFlipped = true
+            
+            //Determine if it's first or second card
+            if  firstFlippedCardIndex == nil {
+                //This first card set
+                firstFlippedCardIndex = indexPath
+                
+            } else {
+                //This second card
+                
+                
+                //TODO: make logic
+                checkForMatches(indexPath )
+            }
+        
         } else {
-            //back flip card 
+            //back flip card
             cell.backFlip()
             card.itsFlipped = false 
         }
@@ -65,6 +79,42 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
+    //MARK: Game logic
+    
+    func checkForMatches(_ secondFlippedCardIndex: IndexPath){
+        //Get cells for two cards
+        let cardOneCell = CollectionView.cellForItem(at: firstFlippedCardIndex!) as? CardCollectionViewCell
+        let cardTwoCell = CollectionView.cellForItem(at: secondFlippedCardIndex) as? CardCollectionViewCell
+        
+        //Get two cards
+        let cardOne = cardArray[firstFlippedCardIndex!.row]
+        let cardTwo = cardArray[secondFlippedCardIndex.row]
+        
+        //Match cards
+        if cardOne.imageName == cardTwo.imageName {
+            //It's match
+            
+            //set the statuses of the card
+            cardOne.itsMatched = true
+            cardTwo.itsMatched = true
+            
+            //Remove cards from grid
+            cardOneCell?.remove()
+            cardTwoCell?.remove()
+             
+        } else {
+            //It's not match
+            
+            //set statuses cards
+            cardOne.itsFlipped = false
+            cardTwo.itsFlipped = false
+            
+            //flip back cards
+            cardOneCell?.backFlip()
+            cardTwoCell?.backFlip()
+        }
+        firstFlippedCardIndex = nil
+    }
     
 }
 
