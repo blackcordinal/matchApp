@@ -12,9 +12,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     
     @IBOutlet weak var CollectionView: UICollectionView!
+    @IBOutlet weak var timerLabel: UILabel!
     
     var model = CardModel()
     var cardArray = [Card]()
+    var timer:Timer?
+    var milliSeconds: Float = 10 * 1000
     
     var firstFlippedCardIndex:IndexPath?
     
@@ -25,12 +28,40 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         CollectionView.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
         cardArray = model.getCards()
+        
+        //create Timer
+        timer = Timer.scheduledTimer(timeInterval:  0.001 , target: self, selector: #selector(timeElapsed), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer!, forMode: .commonModes )
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    //MARK: Timer logic
+    @objc func timeElapsed() {
+        milliSeconds -= 1
+        //convert to seconds
+        let seconds = String(format: "%.2f", milliSeconds/1000)
+        
+        //set label
+        timerLabel.text = seconds
+        //stop timer
+        
+        if milliSeconds <= 0 {
+            //stop timer
+            timer?.invalidate()
+            timerLabel.textColor = UIColor.red
+            //check game
+            checkGameEnded()
+            
+            
+        }
+        
+    }
+    
     
     //MARK: - UICollectionView Protocol implementation
     
@@ -48,6 +79,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //Check time remaining
+        if milliSeconds <= 0 {
+            return
+        }
+        
+        
         let cell = CollectionView.cellForItem(at: indexPath) as! CardCollectionViewCell
         let card = cardArray[indexPath.row]
         
@@ -78,7 +115,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         
     }
-    
+ 
     //MARK: Game logic
     
     func checkForMatches(_ secondFlippedCardIndex: IndexPath){
@@ -101,6 +138,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             //Remove cards from grid
             cardOneCell?.remove()
             cardTwoCell?.remove()
+            
+            //Check game for end
+            checkGameEnded()
              
         } else {
             //It's not match
@@ -121,6 +161,43 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         firstFlippedCardIndex = nil
         
+    }
+    
+    func checkGameEnded() {
+        //Determine if any cards unmatched
+        var isWon = true
+        for card in cardArray {
+            if card.itsMatched == false {
+                isWon = false
+                break
+            }
+        }
+        // Messages
+        var title = ""
+        var message = ""
+        
+        // If user won stop timer
+        if isWon == true {
+            if milliSeconds > 0 {
+                timer?.invalidate()
+            }
+            title = "Congratulation"
+            message = "You won"
+            
+        } else {
+            //check left time
+            if milliSeconds > 0 {
+                return
+            }
+            title = "Game over"
+            message = "You loser"
+        }
+        // Message user
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(alertAction)
+        present(alert, animated: true, completion: nil)
     }
     
 }

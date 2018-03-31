@@ -16,7 +16,12 @@ class CardModel {
         
         for _ in 1...8 {
             
-            let randomNumber = arc4random_uniform(13) + 1
+            var randomNumber = Int(arc4random_uniform(13) + 1)
+            while !checkUniqueCard(randomNumber: randomNumber, array: generatedCards){
+                randomNumber = Int(arc4random_uniform(13) + 1)
+                
+            }
+
             //log the number
             print(randomNumber)
             
@@ -32,13 +37,31 @@ class CardModel {
             
             
             //OPTIONAL: make unique cards in array
+            
+            
         }
-        
+   
+     
         
         
         
         
         return generatedCards
     }
+    
+    func checkUniqueCard (randomNumber: Int, array: [Card] ) -> Bool {
+        for card in array {
+            if card.imageName == "card\(randomNumber)" {
+                return false
+            }
+            
+        }
+        
+        
+        return true
+        
+    }
+        
+
     
 }
