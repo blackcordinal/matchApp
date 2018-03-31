@@ -36,19 +36,28 @@ class CardModel {
             generatedCards.append(cardTwo)
             
             
-            //OPTIONAL: make unique cards in array
+            
             
             
         }
    
      
+        //shuffle card Array
         
+        for _  in 1..<generatedCards.count {
+            let randomNumber = Int(arc4random_uniform(UInt32(generatedCards.count)))
+            let tempCard = generatedCards[randomNumber]
+            generatedCards[randomNumber] = generatedCards[0]
+            generatedCards[0] = tempCard
+            
+            
+        }
         
         
         
         return generatedCards
     }
-    
+    // Make uniqe card in array
     func checkUniqueCard (randomNumber: Int, array: [Card] ) -> Bool {
         for card in array {
             if card.imageName == "card\(randomNumber)" {
@@ -61,6 +70,8 @@ class CardModel {
         return true
         
     }
+    
+    
         
 
     
