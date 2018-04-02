@@ -198,6 +198,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(alertAction)
         present(alert, animated: true, completion: nil)
+       
+        
+        
+        
+        
+    }
+    
+    func reloadGame() {
+        //reload game
+        milliSeconds = 10 * 1000
+        cardArray.removeAll()
+        cardArray = model.getCards()
+        timer = Timer.scheduledTimer(timeInterval:  0.001 , target: self, selector: #selector(timeElapsed), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer!, forMode: .commonModes )
     }
     
 }
